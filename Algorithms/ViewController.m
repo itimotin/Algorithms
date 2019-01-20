@@ -12,12 +12,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSString *letters = @"jg2uy10u1jjjn1end";
+    NSString *letters = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         for(int i=0; i< letters.length; i++){
-            NSLog(@"%C",[letters characterAtIndex:i]);
             NSString *letter = [NSString stringWithFormat:@"%c",[letters characterAtIndex:i] ];
             if([dict objectForKey:letter] != nil){
                 NSInteger count = [[dict objectForKey:letter] integerValue];
@@ -28,9 +27,10 @@
             }
         }
     });
-    
+
     for(NSString *key in [dict allKeys]){
-        NSLog(@"Occurence of %@ = %@", key, [dict objectForKey:key]);
+//        NSLog(@"Occurence of %@ = %@", key, [dict objectForKey:key]);
+        printf("\"%s\" = %s\n",[key UTF8String], [[[dict objectForKey:key] stringValue] UTF8String]);
     }
     
     
